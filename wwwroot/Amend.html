@@ -1,1 +1,99 @@
 ﻿
+<link rel="stylesheet" href="../css/style.css"> <!--This part is what links the CSS file.-->
+
+<div id="page-content-wrapper" class="col-10 pl-0">
+    <div class="jumbotron bg-cover" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.9) 100%), url(/img/Boris.jpg)">
+        <div class="container">
+
+            <div class="d">
+                A customer visiting the venue provides their phone number and name.
+                done
+            </div>
+
+            <p>
+                <!-- For Spacing-->
+            </p>
+
+            <div class="d">
+                A health professional requires information for track and trace purposes.
+                done
+            </div>
+
+            <p>
+                <!-- For Spacing-->
+            </p>
+
+            <div class="d">
+                Consider the algorithm required to search for those who have been in contact.
+                done
+            </div>
+
+            <p>
+                <!-- For Spacing-->
+            </p>
+
+            <div class="d">
+                The venue owner enters details of the venue (tables, number of seats, opening times)
+            </div>
+
+            <p>
+                <!-- For Spacing-->
+            </p>
+
+            <div class="d">
+                A customer can book a table for x number of people.
+                An alert is raised if the number exceeds current government guidelines.
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<!--
+
+    <input type="radio" id="Just_Me" name="people" value="Just_Me"> <!--"Checked" means that this particular box is already ticked, making it convinent for single restaurant-goers.-->
+<label for="Just_Me">Just Me</label>
+
+<input type="radio" id="One" name="people" value="One">
+<label for="One">One</label>
+
+<input type="radio" id="Two" name="people" value="Two">
+<label for="Two">Two</label>
+
+<input type="radio" id="Three" name="people" value="Three">
+<label for="Three">Three</label>
+
+<input type="radio" id="Four" name="people" value="Four">
+<label for="Four">Four</label>
+
+<input type="radio" id="Five" name="people" value="Five">
+<label for="Five">Five</label>
+
+<input type="radio" id="Six" name="people" value="Six">
+<label for="Six">Six or more</label>
+
+<button type="button" onclick="display()">
+    Submit
+</button>
+
+
+
+<div id="alert" style="color:red; font-size:14px; font-weight:bold"></div>
+
+<script>
+    function display() {
+        if (document.getElementById('Six').checked) {
+            document.getElementById("alert").innerHTML
+                = "You and " + document.getElementById("Six").value + " other people?! No, that is not allowed.";
+        }
+        else {
+            document.getElementById("alert").innerHTML
+                = "";
+        }
+    }
+</script>
+
+
+-->
+

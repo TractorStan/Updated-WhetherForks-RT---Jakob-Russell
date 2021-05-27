@@ -5,8 +5,4 @@
     <RootNamespace>New_RT___JR</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\css\" />
-  </ItemGroup>
-
 </Project>

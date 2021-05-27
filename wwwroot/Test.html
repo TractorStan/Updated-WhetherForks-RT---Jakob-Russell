@@ -1,4 +1,5 @@
-﻿<link rel="stylesheet" href="../css/style.css"> <!--This part is what links the CSS file.-->
+﻿
+<link rel="stylesheet" href="../css/style.css"> <!--This part is what links the CSS file.-->
 <body>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -6,66 +7,46 @@
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
          https://firebase.google.com/docs/web/setup#available-libraries -->
-    <!-- Page Content -->
+
+
+
     <div id="page-content-wrapper" class="col-10 pl-0">
         <div class="jumbotron bg-cover" style="background-image: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%,rgba(255,255,255,0.9) 100%), url(/img/Boris.jpg)">
             <div class="container">
 
-                <style>
+                <h1> Remember to use capital letters</h1><br />
 
-                    input[type=text], input[type=password] {
-                        width: 100%;
-                        padding: 6px 20px;
-                        margin: 8px 0;
-                        display: inline-block;
-                        border: 1px solid #ccc;
-                        box-sizing: border-box;
-                    }
-                </style>
+                First and Lastname <input id="namebox" type="text"><br />
+                <br />
 
-                <h1 class="display-4" style="font-family:verdana">
-                    This is where you will Book a table for you and your friends!
-                </h1>
+                Time <input id="timebox" type="text"><br />
+                <br />
 
-                <p class="lead font-weight-bold">
-                    Answer the form below to see if you're elligible!
-                </p>
+                Phone Number <input id="pnbox" type="text"><br />
+                <br />
 
-                <label for="locbox"><b>Venue</b></label>
-                <select id="locbox">
-                    <option value="Plymouth">Plymouth</option>
-                    <option value="Derby">Derby</option>
-                    <option value="Cornwall">Cornwall</option>
-                    <option value="Plympton">Plympton</option>
-                </select><br />
+                Email <input id="emailbox" type="text"><br />
+                <br />
 
-                <label for="namebox"><b>First and Lastname </b></label>
-                <input id="namebox" placeholder="John Smith" type="text"><br />
+                No. of people <input id="pepbox" type="text"><br />
+                <br />
 
-                <label for="timebox"><b>Time (24 Hour Clock)</b></label>
-                <input id="timebox" placeholder="18:00" type="text"><br />
+                Have they submitted a Covid Test? <input id="testbox" type="text"><br />
+                <br />
 
-                <label for="pnbox"><b>Phone Number</b></label>
-                <input id="pnbox" placeholder="01752254520" type="text"><br />
-
-                <label for="emailbox"><b>Email</b></label>
-                <input id="emailbox" placeholder="John.Smith@yahoo.co.uk" type="text"><br />
-
-                <label for="pepbox"><b>No. of people (including you)</b></label>
-                <input id="pepbox" placeholder="1" type="text"><br />
-
+                If so, what is the result? <input id="resultbox" type="text"><br />
+                <br />
 
                 <button id="insert">INSERT</button>
+                <button id="select">SELECT</button>
                 <button id="change">AMEND</button>
-
+                <button id="delete">DELETE</button>
 
                 <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
                 <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-auth.js"></script>
                 <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-database.js"></script>
 
                 <script id="MainScript">
-
-
 
                     //--------------------------------CONFIGURATION------------------------------------------------------------------------//
                     var firebaseConfig = {
@@ -81,57 +62,84 @@
                     firebase.initializeApp(firebaseConfig);
 
                     //------------------------------- Ready Database----------------------------------//
-                    var locV, nameV, timeV, pnV, emailV, pepV;
+                    var nameV, timeV, pnV, emailV, pepV, testV, resultV;
 
                     function Ready() {
-                        locV = document.getElementById("locbox").value
                         nameV = document.getElementById("namebox").value
                         timeV = document.getElementById("timebox").value
                         pnV = document.getElementById("pnbox").value
                         emailV = document.getElementById("emailbox").value
                         pepV = document.getElementById("pepbox").value
+                        testV = document.getElementById("testbox").value
+                        resultV = document.getElementById("resultbox").value
                     }
 
                     //-------------------------------Insert Process--------------------------------------------------------------------------------------//
-                    document.getElementById("insert").onclick = function() {
+                    document.getElementById("insert").onclick = function () {
                         Ready();
                         firebase.database().ref("Customers/" + nameV).set({
-                            VenueLocation: locV,
                             NameOfCustomer: nameV,
                             Time: timeV,
                             PhoneNumber: pnV,
                             Email: emailV,
-                            NoOfPeopleAttending: pepV
-                        });
+                            NoOfPeopleAttending: pepV,
+                            TestStatus: testV,
+                            ResultOfTest: resultV
 
+
+                        });
                     }
+                    //-------------------------------Select Process--------------------------------------------------------------------------------------//
+                    document.getElementById("select").onclick = function () {
+                        Ready();
+                        firebase.database().ref("Customers/" + nameV).on("value", function (snapshot) {
+                            document.getElementById("namebox").value = snapshot.val().NameOfCustomer;
+                            document.getElementById("timebox").value = snapshot.val().Time;
+                            document.getElementById("pnbox").value = snapshot.val().PhoneNumber;
+                            document.getElementById("emailbox").value = snapshot.val().Email;
+                            document.getElementById("pepbox").value = snapshot.val().NoOfPeopleAttending;
+                            document.getElementById("testbox").value = snapshot.val().TestStatus;
+                            document.getElementById("resultbox").value = snapshot.val().ResultOfTest;
+                        })
+                    }
+
                     //-------------------------------Update Process--------------------------------------------------------------------------------------//
                     document.getElementById("change").onclick = function () {
                         Ready();
                         firebase.database().ref("Customers/" + nameV).update({
-                            VenueLocation: locV,
                             NameOfCustomer: nameV,
                             Time: timeV,
                             PhoneNumber: pnV,
                             Email: emailV,
-                            NoOfPeopleAttending: pepV
+                            NoOfPeopleAttending: pepV,
+                            TestStatus: testV,
+                            ResultOfTest: resultV
                         });
                     }
 
                     //-------------------------------Delete Process--------------------------------------------------------------------------------------//
-                    document.getElementById("delete").onclick = function () {
+                    document.getElementById("delete").onclick = function (){
                         Ready();
                         firebase.database().ref("Customers/" + custnumV).remove();
                     }
 
                 </script>
 
+                <form action="index.html" method="get">
 
+                    <button>Return to Home</button>
+
+                </form>
+
+                <form action="https://console.firebase.google.com/project/rtspa-e5efe/database/rtspa-e5efe-default-rtdb/data" method="get">
+
+                    <button>View Database</button>
+
+                </form>
 
             </div>
-
         </div>
-
     </div>
+
 
 </body>

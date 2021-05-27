@@ -5,8 +5,8 @@
 });
 
 $(document).ready(function () {
-    $('#htmlpage').click(function () {
-        $('#page-content-wrapper').load('htmlpage.html');
+    $('#homepage').click(function () {
+        $('#page-content-wrapper').load('index.html');
     })
 });
 
@@ -29,7 +29,15 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-    $('#bookp2').click(function () {
-        $('#page-content-wrapper').load('Booking2.html');
+    $('#staffeyesonly').click(function () {
+        $('#page-content-wrapper').load('StaffEyesOnly.html');
     })
 });
+
+
+$(document).ready(function () {
+    $('#report').click(function () {
+        $('#page-content-wrapper').load('Report-A-Test.html');
+    })
+});
+
